@@ -39,6 +39,14 @@ public class SlimeGrounded : SlimeStates.SlimeState1Param<bool>
   [SerializeField]
   private Transform sourceTransform;
 
+  [Header("Blood Running")]
+  [SerializeField]
+  private float horizSpeedOnBlood = 40f;
+  [SerializeField]
+  private Transform bloodTrailSource;
+  [SerializeField]
+  private GameObject bloodTrailPrototype;
+
   public override void Enter(bool isLanding) {
     this.isLanding = isLanding;
     this.didSpawnLandingDroplets = false;
@@ -61,7 +69,10 @@ public class SlimeGrounded : SlimeStates.SlimeState1Param<bool>
 
     float horizInput = slime.playerInput.GetHorizInput();
 
-    float targetVelocityX = horizInput * slime.horizSpeed;
+    bool isOnBlood = slime.groundBloodChecker.IsGroundBloodActive();
+    float speed = isOnBlood ? horizSpeedOnBlood : slime.horizSpeed;
+
+    float targetVelocityX = horizInput * speed;
     slime.velocity.x = Mathf.SmoothDamp(
       slime.velocity.x,
       targetVelocityX,
@@ -78,7 +89,11 @@ public class SlimeGrounded : SlimeStates.SlimeState1Param<bool>
     if (horizInput != 0f)
     {
       slime.FaceMovementDirection();
+      if (isOnBlood) {
+        SpawnTrail(horizInput > 0);
+      }
     }
+
     slime.controller.Move(slime.velocity * Time.deltaTime);
     if (!slime.controller.isGrounded)
     {
@@ -114,6 +129,14 @@ public class SlimeGrounded : SlimeStates.SlimeState1Param<bool>
     impulse.y = 1;
     impulse *= force;
     dropletRb.AddForce(impulse);
+  }
+
+  private void SpawnTrail(bool facingRight) {
+    GameObject trail = GameObject.Instantiate(bloodTrailPrototype, bloodTrailSource.position, Quaternion.identity);
+    if (!facingRight) {
+      Transform trailTransform = trail.GetComponent<Transform>();
+      trailTransform.localScale = new Vector3(-1f, 1f, 1f) * slime.transform.localScale.y;
+    }
   }
 
   private void DoShrink()

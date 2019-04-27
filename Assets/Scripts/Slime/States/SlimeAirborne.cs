@@ -28,6 +28,9 @@ public class SlimeAirborne : SlimeStates.SlimeState1Param<bool>
 
   private bool didRunThisFrame = false;
 
+  // Add a little slop value to help with checks to see if we're boosted.
+  private float boostedVelocitySlop = 0.05f;
+
   public override void Enter(bool allowCoyoteTime)
   {
     if (allowCoyoteTime)
@@ -57,11 +60,18 @@ public class SlimeAirborne : SlimeStates.SlimeState1Param<bool>
     float horizInput = slime.playerInput.GetHorizInput();
     // move
     float targetVelocityX = horizInput * slime.horizSpeed;
-    slime.velocity.x = Mathf.SmoothDamp(
-      slime.velocity.x,
-      targetVelocityX,
-      ref slime.velocityXSmoothing,
-      slime.velocityXSmoothFactorAirborne);
+
+    bool isBoosted = Mathf.Abs(slime.velocity.x) > (slime.horizSpeed + boostedVelocitySlop);
+
+    if (isBoosted && horizInput != 0f && (Mathf.Sign(horizInput) == Mathf.Sign(slime.velocity.x))) {// && Mathf.Abs(targetVelocityX) < Mathf.Abs(slime.velocity.x)) {
+      // don't need to slow him down!
+    } else {
+      slime.velocity.x = Mathf.SmoothDamp(
+        slime.velocity.x,
+        targetVelocityX,
+        ref slime.velocityXSmoothing,
+        slime.velocityXSmoothFactorAirborne);
+    }
 
     if (slime.velocity.x != 0f)
     {

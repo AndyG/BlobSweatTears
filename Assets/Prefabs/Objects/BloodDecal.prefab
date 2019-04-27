@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 9175897521219299369}
   - component: {fileID: 5024210653471742117}
-  - component: {fileID: 8823874560430113398}
   m_Layer: 22
   m_Name: BloodDecalRenderer
   m_TagString: Untagged
@@ -66,8 +65,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1604419071
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: -4777509499535341748, guid: fd0e1e9fbf8fb49bdab264beb57d21d4,
     type: 3}
@@ -81,25 +80,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &8823874560430113398
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6340328050046241146}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a6ddc48e5b680466cb1122d702a9bf14, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6911141613846994971
 GameObject:
   m_ObjectHideFlags: 0
@@ -110,6 +90,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6911141613846994964}
   - component: {fileID: 133546449922364177}
+  - component: {fileID: 5783493406551464338}
+  - component: {fileID: 8061062294430124186}
   m_Layer: 22
   m_Name: BloodDecal
   m_TagString: Untagged
@@ -158,3 +140,35 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.1850127}
   m_EdgeRadius: 0
+--- !u!95 &5783493406551464338
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6911141613846994971}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 387399d7a50b14b4c8f1d56ec55bccb0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8061062294430124186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6911141613846994971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 461cec706735cf5478c227b854aa30af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isFinishedSpawning: 0

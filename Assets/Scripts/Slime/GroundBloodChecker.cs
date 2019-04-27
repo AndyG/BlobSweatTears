@@ -44,4 +44,24 @@ public class GroundBloodChecker : MonoBehaviour
 
         return groundLeft && groundRight;
     }
+
+    public bool IsGroundBloodActive() {
+        Vector2 position = transform.position;
+        Vector2 bottomLeftOrigin = new Vector2(position.x - bloodCheckRadius, position.y + skinWidth);
+        Vector2 bottomRightOrigin = new Vector2(position.x + bloodCheckRadius, position.y + skinWidth);
+
+        // cast downward and see if there is no blood beneath us.
+        RaycastHit2D bloodLeft = Physics2D.Raycast(bottomLeftOrigin, Vector2.down, rayDepth, groundBloodLayerMask);
+        RaycastHit2D bloodRight = Physics2D.Raycast(bottomRightOrigin, Vector2.down, rayDepth, groundBloodLayerMask);
+        
+        // need both sides.
+        if (!bloodLeft || !bloodRight) {
+            return false;
+        }
+
+        GroundBlood groundBloodLeft = bloodLeft.transform.GetComponent<GroundBlood>();
+        GroundBlood groundBloodRight = bloodRight.transform.GetComponent<GroundBlood>();
+
+        return groundBloodLeft.isFinishedSpawning && groundBloodRight.isFinishedSpawning;
+    }
 }
