@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Prime31;
 
 
@@ -10,11 +11,21 @@ public class Slime : MonoBehaviour, AnimationManager.AnimationProvider
   [System.NonSerialized]
   public Animator animator;
 
+  [Header("Health")]
+  [SerializeField]
+  private int health;
+
+  [SerializeField]
+  private float deathScaleThreshold = 0.2f;
+
+  [Header("Input")]
+  [SerializeField]
   public PlayerInput playerInput;
 
   [System.NonSerialized]
   public CharacterController2D controller;
 
+  [Header("Stats")]
   public float gravity;
   public float horizSpeed = 0.5f;
   public float minJumpVelocity = 5;
@@ -59,8 +70,7 @@ public class Slime : MonoBehaviour, AnimationManager.AnimationProvider
   {
     playerInput.Update();
     fsm.TickCurrentState();
-
-    transform.localScale = new Vector3(IsFacingDefaultDirection() ? 1f : -1f, 1f, 1f);
+    UpdateScale();
   }
 
   public bool IsFacingDefaultDirection()
@@ -83,5 +93,38 @@ public class Slime : MonoBehaviour, AnimationManager.AnimationProvider
   public string GetAnimation()
   {
     return fsm.currentState.GetAnimation();
+  }
+
+  public void Shrink(int amount)
+  {
+    Debug.Log("shrink");
+    SpawnBloodDroplet();
+    this.health -= amount;
+    UpdateScale();
+  }
+
+  private void SpawnBloodDroplet()
+  {
+
+  }
+
+  private void UpdateScale()
+  {
+    int xSign = IsFacingDefaultDirection() ? 1 : -1;
+    float scale = health / 100f;
+
+    if (scale < deathScaleThreshold)
+    {
+      //todo -- better death
+      SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    this.transform.localScale = new Vector3(
+      scale * xSign,
+      scale,
+      1f
+    );
+
+    controller.primeRaycastOrigins();
   }
 }

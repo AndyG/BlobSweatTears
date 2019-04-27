@@ -46,3 +46,4 @@ MonoBehaviour:
   jumpPower: 25
   enableCrouch: 0
   jumpEffect: {fileID: 0}
+  shrinkRate: 2

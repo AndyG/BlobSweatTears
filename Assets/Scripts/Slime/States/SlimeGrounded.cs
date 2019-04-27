@@ -16,21 +16,21 @@ public class SlimeGrounded : SlimeStates.SlimeState0Param
   [SerializeField]
   GameObject jumpEffect;
 
-  private float attackCooldown = 0.05f;
-  private float timeInState = 0.25f;
+  [SerializeField]
+  private float shrinkRate;
+
+  private float shrinkCooldown;
 
   private bool didRunThisFrame = false;
 
   public override void Enter()
   {
-    timeInState = 0f;
+    ResetShrinkCooldown();
   }
 
   public override void Tick()
   {
-    Debug.Log("tick");
     didRunThisFrame = false;
-    timeInState += Time.deltaTime;
 
     if (slime.playerInput.GetDidPressJumpBuffered())
     {
@@ -42,7 +42,6 @@ public class SlimeGrounded : SlimeStates.SlimeState0Param
     float horizInput = slime.playerInput.GetHorizInput();
 
     float targetVelocityX = horizInput * slime.horizSpeed;
-    Debug.Log("target velocity x: " + targetVelocityX);
     slime.velocity.x = Mathf.SmoothDamp(
       slime.velocity.x,
       targetVelocityX,
@@ -65,10 +64,30 @@ public class SlimeGrounded : SlimeStates.SlimeState0Param
     {
       slime.fsm.ChangeState(slime.stateAirborne, slime.stateAirborne, true);
     }
+
+    if (didRunThisFrame)
+    {
+      shrinkCooldown -= Time.deltaTime;
+      if (shrinkCooldown <= 0f)
+      {
+        DoShrink();
+      }
+    }
   }
 
   public override string GetAnimation()
   {
     return didRunThisFrame ? "SlimeIdle" : "SlimeIdle";
+  }
+
+  private void DoShrink()
+  {
+    slime.Shrink(1);
+    ResetShrinkCooldown();
+  }
+
+  private void ResetShrinkCooldown()
+  {
+    shrinkCooldown = 1 / shrinkRate;
   }
 }
