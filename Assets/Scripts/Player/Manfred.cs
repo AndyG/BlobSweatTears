@@ -156,8 +156,10 @@ public class Manfred : MonoBehaviour, AnimationManager.AnimationProvider, Hurtab
     StartCoroutine(DelayedShowEndScreen());
   }
 
-  private void Die() {
-    if (!fsm.currentState.IsDead()) {
+  private void Die()
+  {
+    if (!fsm.currentState.IsDead())
+    {
       effectsAudioSource.PlayOneShot(deathSoundEffect);
     }
     fsm.ChangeState(stateDead, stateDead);
