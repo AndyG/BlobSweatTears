@@ -76,7 +76,7 @@ public class SlimeAirborne : SlimeStates.SlimeState1Param<bool>
     if (collisions.below)
     {
       slime.velocity.y = 0f;
-      slime.fsm.ChangeState(slime.stateGrounded, slime.stateGrounded);
+      slime.fsm.ChangeState(slime.stateGrounded, slime.stateGrounded, true);
       return;
     }
   }
@@ -85,11 +85,11 @@ public class SlimeAirborne : SlimeStates.SlimeState1Param<bool>
   {
     if (slime.velocity.y > 0)
     {
-      return "SlimeIdle";
+      return "SlimeJump";
     }
     else
     {
-      return "SlimeIdle";
+      return "SlimeFall";
     }
   }
 }

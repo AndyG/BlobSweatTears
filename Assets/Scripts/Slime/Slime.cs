@@ -49,6 +49,17 @@ public class Slime : MonoBehaviour, AnimationManager.AnimationProvider
   public SlimeGrounded stateGrounded;
   public SlimeAirborne stateAirborne;
 
+  [Header("Blood")]
+  public GroundBloodChecker groundBloodChecker;
+  [SerializeField]
+  private GameObject groundBloodPrototype;
+
+  [Header("Goal")]
+  [SerializeField]
+  private LayerMask goalpostLayerMask;
+
+  private BoxCollider2D goalpostChecker;
+
   void Awake()
   {
     playerInput.Awake();
@@ -59,6 +70,7 @@ public class Slime : MonoBehaviour, AnimationManager.AnimationProvider
     animator = GetComponent<Animator>();
     controller = GetComponent<CharacterController2D>();
     animationManager = new AnimationManager(animator, this);
+    goalpostChecker = GameObject.FindGameObjectWithTag("GoalpostChecker").GetComponent<BoxCollider2D>();
 
     fsm = new FSM<Slime, SlimeStates.ISlimeState>(this);
 
@@ -70,7 +82,9 @@ public class Slime : MonoBehaviour, AnimationManager.AnimationProvider
   {
     playerInput.Update();
     fsm.TickCurrentState();
+    animationManager.Update();
     UpdateScale();
+    CheckForWin();
   }
 
   public bool IsFacingDefaultDirection()
@@ -105,7 +119,10 @@ public class Slime : MonoBehaviour, AnimationManager.AnimationProvider
 
   private void SpawnBloodDroplet()
   {
+    Vector3 position = transform.position;
+    // position = new Vector3(Mathf.Round(position.x), Mathf.Round(position.y), position.z);
 
+    GameObject blood = GameObject.Instantiate(groundBloodPrototype, position, Quaternion.identity);
   }
 
   private void UpdateScale()
@@ -126,5 +143,14 @@ public class Slime : MonoBehaviour, AnimationManager.AnimationProvider
     );
 
     controller.recalculateDistanceBetweenRays();
+  }
+
+  private void CheckForWin() {
+    Collider2D goalpost = Physics2D.OverlapBox(goalpostChecker.bounds.center, goalpostChecker.bounds.size / 2, 0f, goalpostLayerMask);
+    if (goalpost != null) {
+      Debug.Log("restart");
+      //todo -- better win
+      SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
   }
 }

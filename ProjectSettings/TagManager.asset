@@ -8,6 +8,7 @@ TagManager:
   - Hurtboxes
   - Hitboxes
   - EffectAudioSource
+  - GoalpostChecker
   layers:
   - Default
   - TransparentFX
@@ -31,9 +32,9 @@ TagManager:
   - SiphonSink
   - Spikes
   - BloodFactory
-  - 
-  - 
-  - 
+  - GroundBlood
+  - GoalpostCheck
+  - Goalpost
   - 
   - 
   - 

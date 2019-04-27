@@ -4,7 +4,7 @@ using UnityEngine;
 
 using Prime31;
 
-public class SlimeGrounded : SlimeStates.SlimeState0Param
+public class SlimeGrounded : SlimeStates.SlimeState1Param<bool>
 {
 
   [SerializeField]
@@ -17,19 +17,39 @@ public class SlimeGrounded : SlimeStates.SlimeState0Param
   GameObject jumpEffect;
 
   [SerializeField]
-  private float shrinkRate;
+  private int shrinkRate;
 
   private float shrinkCooldown;
 
   private bool didRunThisFrame = false;
 
-  public override void Enter()
-  {
-    ResetShrinkCooldown();
+  [SerializeField]
+  private LayerMask groundBloodLayerMask;
+
+  private bool isLanding = false;
+  private bool didSpawnLandingDroplets;
+
+  [Header("Landing")]
+  [SerializeField]
+  private GameObject landingDropletPrototype;
+  [SerializeField]
+  private int numLandingDroplets;
+  [SerializeField]
+  private float force;
+  [SerializeField]
+  private Transform sourceTransform;
+
+  public override void Enter(bool isLanding) {
+    this.isLanding = isLanding;
+    this.didSpawnLandingDroplets = false;
   }
 
   public override void Tick()
   {
+    if (isLanding && !didSpawnLandingDroplets) {
+      SpawnLandingDroplets();
+    }
+
     didRunThisFrame = false;
 
     if (slime.playerInput.GetDidPressJumpBuffered())
@@ -65,14 +85,7 @@ public class SlimeGrounded : SlimeStates.SlimeState0Param
       slime.fsm.ChangeState(slime.stateAirborne, slime.stateAirborne, true);
     }
 
-    if (didRunThisFrame)
-    {
-      shrinkCooldown -= Time.deltaTime;
-      if (shrinkCooldown <= 0f)
-      {
-        DoShrink();
-      }
-    }
+    CheckForGroundBlood();
   }
 
   public override string GetAnimation()
@@ -80,14 +93,31 @@ public class SlimeGrounded : SlimeStates.SlimeState0Param
     return didRunThisFrame ? "SlimeIdle" : "SlimeIdle";
   }
 
-  private void DoShrink()
-  {
-    slime.Shrink(1);
-    ResetShrinkCooldown();
+  private void CheckForGroundBlood() {
+    GroundBloodChecker groundBloodChecker = slime.groundBloodChecker;
+    if (groundBloodChecker.IsOnBloodlessGround()) {
+      DoShrink();
+    }
   }
 
-  private void ResetShrinkCooldown()
+  private void SpawnLandingDroplets() {
+    for (int i = 0; i < numLandingDroplets; i++) {
+      SpawnLandingDroplet();
+    }
+    didSpawnLandingDroplets = true;
+  }
+
+  private void SpawnLandingDroplet() {
+    GameObject landingDroplet = GameObject.Instantiate(landingDropletPrototype, sourceTransform.position, Quaternion.identity);
+    Rigidbody2D dropletRb = landingDroplet.GetComponent<Rigidbody2D>();
+    Vector2 impulse = Random.insideUnitCircle;
+    impulse.y = 1;
+    impulse *= force;
+    dropletRb.AddForce(impulse);
+  }
+
+  private void DoShrink()
   {
-    shrinkCooldown = 1 / shrinkRate;
+    slime.Shrink(shrinkRate);
   }
 }

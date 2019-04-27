@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3230009111075576670}
   - component: {fileID: 3230009111075576671}
   m_Layer: 21
-  m_Name: airblood
+  m_Name: AirBlood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -97,7 +97,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 10
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -141,5 +141,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dbbf6328e9d84759a3979c13baa15d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundBloodPrefab: {fileID: 6911141613846994971, guid: fbc2eec9c22e244acb8232f8e5d4938a,
+  groundBloodPrefab: {fileID: 7240959445961087467, guid: 7c5557622e90b29469b398d1fa7876a7,
     type: 3}
+  timeToLive: 2

@@ -6,23 +6,21 @@ public class AirSlime : MonoBehaviour
     [SerializeField]
     private GameObject groundBloodPrefab;
 
+    [SerializeField]
+    private float timeToLive = 2f;
 
-    // Use this for initialization
-    void Start()
-    {
+    private float timeAlive = 0f;
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+    void Update() {
+        this.timeAlive += Time.deltaTime;
+        if (timeAlive >= timeToLive) {
+            KillYourself();
+        }
     }
 
     private void KillYourself()
     {
-        var parent = gameObject;
-        Destroy(parent);
+        Destroy(gameObject);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -30,7 +28,6 @@ public class AirSlime : MonoBehaviour
         var myX = Mathf.RoundToInt(gameObject.transform.position.x);
         var myY = Mathf.RoundToInt(gameObject.transform.position.y);
         SpawnMoreBloodAndDie(myX, myY);
-
     }
 
     private void SpawnMoreBloodAndDie(int xPosition, int yPosition)

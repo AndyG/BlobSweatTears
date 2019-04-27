@@ -6,40 +6,27 @@ public class ParallaxImage : MonoBehaviour
 {
 
     [SerializeField]
-    private Transform target;
+    private float parallaxCoefficient = 1f; 
 
-    [SerializeField]
-    private float parallaxScale = 1f; 
-
-    private Vector3 lastTargetPosition;
-
-    private bool initialized = false;
-
-    private Vector3 offset;
+    private Transform cameraTransform;
+    private float lastCameraX;
+    private float lastCameraY;
 
     void Start() {
-        initialized = false;
-        TrackTarget();
+        cameraTransform = Camera.main.transform;
+        lastCameraX = cameraTransform.position.x;
     }
 
     // Update is called once per frame
     void Update()
     {
-        TrackTarget();
-    }
+        float deltaX = cameraTransform.position.x - lastCameraX;
+        float deltaY = cameraTransform.position.y - lastCameraY;
 
-    void OnValidate() {
-        TrackTarget();
-    }
+        transform.position += Vector3.right * (deltaX * parallaxCoefficient);
+        transform.position += Vector3.down * (deltaY * parallaxCoefficient);
 
-    private void TrackTarget() {
-        if (!initialized) {
-            lastTargetPosition = target.position;
-            initialized = true;
-        } else {
-            Vector3 delta = lastTargetPosition - target.position;
-            this.transform.position = this.transform.position + delta * parallaxScale;
-            lastTargetPosition = target.position;
-        }
+        lastCameraX = cameraTransform.position.x;
+        lastCameraY = cameraTransform.position.y;
     }
 }
