@@ -386,6 +386,7 @@ namespace Prime31
     {
       // our raycasts need to be fired from the bounds inset by the skinWidth
       var modifiedBounds = boxCollider.bounds;
+      Debug.Log("bounds: " + modifiedBounds);
       modifiedBounds.Expand(-2f * _skinWidth);
 
       _raycastOrigins.topLeft = new Vector2(modifiedBounds.min.x, modifiedBounds.max.y);

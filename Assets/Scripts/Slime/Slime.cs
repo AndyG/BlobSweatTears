@@ -125,6 +125,6 @@ public class Slime : MonoBehaviour, AnimationManager.AnimationProvider
       1f
     );
 
-    controller.primeRaycastOrigins();
+    controller.recalculateDistanceBetweenRays();
   }
 }
