@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ab06da6f62884244968fb60225cd483, type: 3}
+  m_Name: CardMapper
+  m_EditorClassIdentifier: 
+  deathCard: {fileID: 11400000, guid: d7df9baf3f82695418e83468eeb77fd5, type: 2}
+  loverCard: {fileID: 11400000, guid: 7738c54ecf28e774d8176fe3737c9f9e, type: 2}
+  judgmentCard: {fileID: 11400000, guid: 2ebe4274304ef4a4dbd667da63386242, type: 2}

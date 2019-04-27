@@ -1,0 +1,25 @@
+fileFormatVersion: 2
+guid: c957677b80f3b49448f0b9fe03ac26aa
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 8f78f30ccc049014ab91028a5f59fa22, type: 3}
+  textureSettings:
+    textureType: 8
+    pixelsPerUnit: 16
+    meshType: 1
+    extrudeEdges: 0
+    spritePivot: {x: 0.5, y: 0}
+    generatePhysics: 0
+    wrapMode: 1
+    filterMode: 0
+    tileSize: {x: 100, y: 48}
+    tilePadding: {x: 0, y: 0}
+    tileOffset: {x: 0, y: 0}
+  animationSettings: []
+  atlas: {fileID: -8328923581568760697, guid: c957677b80f3b49448f0b9fe03ac26aa, type: 3}
+  importType: 1
