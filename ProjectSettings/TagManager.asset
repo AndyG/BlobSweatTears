@@ -30,7 +30,7 @@ TagManager:
   - PlayerHitbox
   - SiphonSink
   - Spikes
-  - 
+  - BloodFactory
   - 
   - 
   - 
@@ -59,4 +59,7 @@ TagManager:
     locked: 0
   - name: UI
     uniqueID: 2306839849
+    locked: 0
+  - name: Trails
+    uniqueID: 2690548225
     locked: 0
