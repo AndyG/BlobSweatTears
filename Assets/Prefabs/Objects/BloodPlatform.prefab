@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4388828156398710284}
   - component: {fileID: 4388828156398710287}
   - component: {fileID: 4388828156398710286}
-  m_Layer: 11
+  m_Layer: 25
   m_Name: BloodPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
