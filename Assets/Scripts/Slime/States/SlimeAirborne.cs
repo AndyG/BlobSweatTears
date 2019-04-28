@@ -14,7 +14,7 @@ public class SlimeAirborne : SlimeStates.SlimeState1Param<bool>
   private bool enableCrouch;
 
   [SerializeField]
-  GameObject jumpEffect;
+  GameObject landEffect;
 
   [SerializeField]
   private float coyoteJumpPower;
@@ -87,6 +87,7 @@ public class SlimeAirborne : SlimeStates.SlimeState1Param<bool>
     {
       slime.velocity.y = 0f;
       slime.fsm.ChangeState(slime.stateGrounded, slime.stateGrounded, true);
+      SpawnLandEffect();
       return;
     }
   }
@@ -101,5 +102,11 @@ public class SlimeAirborne : SlimeStates.SlimeState1Param<bool>
     {
       return "SlimeFall";
     }
+  }
+
+  private void SpawnLandEffect() {
+    GameObject landEffect = GameObject.Instantiate(this.landEffect, transform.position, Quaternion.identity);
+    Transform landEffectTransform = landEffect.GetComponent<Transform>();
+    landEffectTransform.localScale = new Vector3(1f, 1f, 1f) * slime.transform.localScale.y;
   }
 }

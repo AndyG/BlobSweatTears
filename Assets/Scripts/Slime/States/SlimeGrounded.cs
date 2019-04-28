@@ -55,8 +55,10 @@ public class SlimeGrounded : SlimeStates.SlimeState1Param<bool>
   public override void Tick()
   {
     if (isLanding && !didSpawnLandingDroplets) {
-      SpawnLandingDroplets();
+      // SpawnLandingDroplets();
     }
+
+    CheckForGroundBlood();
 
     didRunThisFrame = false;
 
@@ -64,6 +66,7 @@ public class SlimeGrounded : SlimeStates.SlimeState1Param<bool>
     {
       slime.velocity.y = jumpPower;
       slime.fsm.ChangeState(slime.stateAirborne, slime.stateAirborne, false);
+      SpawnJumpEffect();
       return;
     }
 
@@ -99,8 +102,6 @@ public class SlimeGrounded : SlimeStates.SlimeState1Param<bool>
     {
       slime.fsm.ChangeState(slime.stateAirborne, slime.stateAirborne, true);
     }
-
-    CheckForGroundBlood();
   }
 
   public override string GetAnimation()
@@ -142,5 +143,11 @@ public class SlimeGrounded : SlimeStates.SlimeState1Param<bool>
   private void DoShrink()
   {
     slime.Shrink(shrinkRate);
+  }
+
+  private void SpawnJumpEffect() {
+    GameObject jumpEffect = GameObject.Instantiate(this.jumpEffect, transform.position, Quaternion.identity);
+    Transform jumpEffectTransform = jumpEffect.GetComponent<Transform>();
+    jumpEffectTransform.localScale = new Vector3(1f, 1f, 1f) * slime.transform.localScale.y;
   }
 }
