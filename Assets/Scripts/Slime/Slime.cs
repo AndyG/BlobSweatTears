@@ -49,6 +49,7 @@ public class Slime : MonoBehaviour, AnimationManager.AnimationProvider
   public SlimeGrounded stateGrounded;
   public SlimeAirborne stateAirborne;
   public SlimeWallCling stateWallCling;
+  public SlimeVictory stateVictory;
 
   [Header("Blood")]
   public GroundBloodChecker groundBloodChecker;
@@ -67,6 +68,8 @@ public class Slime : MonoBehaviour, AnimationManager.AnimationProvider
   [Header("Spikes")]
   [SerializeField]
   private SpikeChecker spikeChecker;
+
+  private bool didWin = false;
 
   void Awake()
   {
@@ -93,7 +96,9 @@ public class Slime : MonoBehaviour, AnimationManager.AnimationProvider
     fsm.TickCurrentState();
     animationManager.Update();
     UpdateScale();
-    CheckForWin();
+    if (!didWin) {
+      CheckForWin();
+    }
     CheckForSpikes();
   }
 
@@ -124,6 +129,10 @@ public class Slime : MonoBehaviour, AnimationManager.AnimationProvider
     SpawnBloodDroplet();
     this.health -= amount;
     UpdateScale();
+  }
+
+  public void OnVictoryCompleted() {
+    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
   }
 
   private void SpawnBloodDroplet()
@@ -159,11 +168,8 @@ public class Slime : MonoBehaviour, AnimationManager.AnimationProvider
     Collider2D goalpost = Physics2D.OverlapBox(goalpostChecker.bounds.center, goalpostChecker.bounds.size / 2, 0f, goalpostLayerMask);
     if (goalpost != null)
     {
-      Debug.Log("restart");
-      //todo -- better win
-      SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-      // Destroy(goalpost.gameObject);
-      // Absorb(50);
+      fsm.ChangeState(stateVictory, stateVictory);
+      didWin = true;
     }
   }
 
