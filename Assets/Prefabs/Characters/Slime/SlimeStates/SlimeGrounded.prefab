@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1261819332}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LandingDropletSource
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30,6 +30,36 @@ Transform:
   m_Father: {fileID: 5648845783760091924}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1372041527
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1372041528}
+  m_Layer: 8
+  m_Name: BloodTrailSource
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1372041528
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1372041527}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.401, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5648845783760091924}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8322409301636273411
 GameObject:
   m_ObjectHideFlags: 0
@@ -40,7 +70,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5648845783760091924}
   - component: {fileID: 3573528456901535182}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SlimeGrounded
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59,6 +89,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1261819332}
+  - {fileID: 1372041528}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -76,13 +107,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpPower: 25
   enableCrouch: 0
-  jumpEffect: {fileID: 0}
-  shrinkRate: 1
+  jumpEffect: {fileID: 3960036238463455781, guid: 54c6266508ee4044d810005793e0bc7a,
+    type: 3}
+  shrinkRate: 3
   groundBloodLayerMask:
     serializedVersion: 2
     m_Bits: 4194304
   landingDropletPrototype: {fileID: 3230009111075576658, guid: 46cb0c4befe2946658586dabdfda73a0,
     type: 3}
-  numLandingDroplets: 10
-  force: 5
+  numLandingDroplets: 5
+  force: 800
   sourceTransform: {fileID: 1261819332}
+  horizSpeedOnBlood: 40
+  bloodTrailSource: {fileID: 1372041528}
+  bloodTrailPrototype: {fileID: 9147335260488801856, guid: 667e98e1331c97b4cb0b7c2c4713d14f,
+    type: 3}

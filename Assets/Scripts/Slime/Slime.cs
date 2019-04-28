@@ -48,6 +48,7 @@ public class Slime : MonoBehaviour, AnimationManager.AnimationProvider
   [Header("States")]
   public SlimeGrounded stateGrounded;
   public SlimeAirborne stateAirborne;
+  public SlimeWallCling stateWallCling;
 
   [Header("Blood")]
   public GroundBloodChecker groundBloodChecker;
@@ -58,7 +59,14 @@ public class Slime : MonoBehaviour, AnimationManager.AnimationProvider
   [SerializeField]
   private LayerMask goalpostLayerMask;
 
+  [Header("WallJump")]
+  public float lockAirborneMovementTime;
+
   private BoxCollider2D goalpostChecker;
+
+  [Header("Spikes")]
+  [SerializeField]
+  private SpikeChecker spikeChecker;
 
   void Awake()
   {
@@ -80,11 +88,13 @@ public class Slime : MonoBehaviour, AnimationManager.AnimationProvider
   // Update is called once per frame
   void Update()
   {
+    lockAirborneMovementTime -= Time.deltaTime;
     playerInput.Update();
     fsm.TickCurrentState();
     animationManager.Update();
     UpdateScale();
     CheckForWin();
+    CheckForSpikes();
   }
 
   public bool IsFacingDefaultDirection()
@@ -111,7 +121,6 @@ public class Slime : MonoBehaviour, AnimationManager.AnimationProvider
 
   public void Shrink(int amount)
   {
-    Debug.Log("shrink");
     SpawnBloodDroplet();
     this.health -= amount;
     UpdateScale();
@@ -145,9 +154,11 @@ public class Slime : MonoBehaviour, AnimationManager.AnimationProvider
     controller.recalculateDistanceBetweenRays();
   }
 
-  private void CheckForWin() {
+  private void CheckForWin()
+  {
     Collider2D goalpost = Physics2D.OverlapBox(goalpostChecker.bounds.center, goalpostChecker.bounds.size / 2, 0f, goalpostLayerMask);
-    if (goalpost != null) {
+    if (goalpost != null)
+    {
       Debug.Log("restart");
       //todo -- better win
       SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -156,7 +167,16 @@ public class Slime : MonoBehaviour, AnimationManager.AnimationProvider
     }
   }
 
-  private void Absorb(int amount) {
+  private void CheckForSpikes()
+  {
+    if (spikeChecker.IsOnSpikes())
+    {
+      SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+  }
+
+  private void Absorb(int amount)
+  {
     this.health += amount;
     UpdateScale();
   }
