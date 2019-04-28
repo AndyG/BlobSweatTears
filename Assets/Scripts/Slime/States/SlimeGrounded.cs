@@ -28,6 +28,7 @@ public class SlimeGrounded : SlimeStates.SlimeState1Param<bool>
 
   private bool isLanding = false;
   private bool didSpawnLandingDroplets;
+  private bool didShrink = false;
 
   [Header("Landing")]
   [SerializeField]
@@ -47,16 +48,22 @@ public class SlimeGrounded : SlimeStates.SlimeState1Param<bool>
   [SerializeField]
   private GameObject bloodTrailPrototype;
 
-  public override void Enter(bool isLanding) {
+  public override void Enter(bool isLanding)
+  {
     this.isLanding = isLanding;
     this.didSpawnLandingDroplets = false;
+    this.didShrink = false;
   }
 
   public override void Tick()
   {
-    if (isLanding && !didSpawnLandingDroplets) {
-      // SpawnLandingDroplets();
+    if (isLanding && slime.groundBloodChecker.IsOnBloodlessGround() && !didShrink)
+    {
+      slime.Shrink();
+      this.didShrink = true;
     }
+
+    isLanding = false;
 
     CheckForGroundBlood();
 
@@ -92,7 +99,8 @@ public class SlimeGrounded : SlimeStates.SlimeState1Param<bool>
     if (horizInput != 0f)
     {
       slime.FaceMovementDirection();
-      if (isOnBlood) {
+      if (isOnBlood)
+      {
         SpawnTrail(horizInput > 0);
       }
     }
@@ -109,21 +117,26 @@ public class SlimeGrounded : SlimeStates.SlimeState1Param<bool>
     return didRunThisFrame ? "SlimeIdle" : "SlimeIdle";
   }
 
-  private void CheckForGroundBlood() {
+  private void CheckForGroundBlood()
+  {
     GroundBloodChecker groundBloodChecker = slime.groundBloodChecker;
-    if (groundBloodChecker.IsOnBloodlessGround()) {
+    if (groundBloodChecker.IsOnBloodlessGround())
+    {
       DoShrink();
     }
   }
 
-  private void SpawnLandingDroplets() {
-    for (int i = 0; i < numLandingDroplets; i++) {
+  private void SpawnLandingDroplets()
+  {
+    for (int i = 0; i < numLandingDroplets; i++)
+    {
       SpawnLandingDroplet();
     }
     didSpawnLandingDroplets = true;
   }
 
-  private void SpawnLandingDroplet() {
+  private void SpawnLandingDroplet()
+  {
     GameObject landingDroplet = GameObject.Instantiate(landingDropletPrototype, sourceTransform.position, Quaternion.identity);
     Rigidbody2D dropletRb = landingDroplet.GetComponent<Rigidbody2D>();
     Vector2 impulse = Random.insideUnitCircle;
@@ -132,9 +145,11 @@ public class SlimeGrounded : SlimeStates.SlimeState1Param<bool>
     dropletRb.AddForce(impulse);
   }
 
-  private void SpawnTrail(bool facingRight) {
+  private void SpawnTrail(bool facingRight)
+  {
     GameObject trail = GameObject.Instantiate(bloodTrailPrototype, bloodTrailSource.position, Quaternion.identity);
-    if (!facingRight) {
+    if (!facingRight)
+    {
       Transform trailTransform = trail.GetComponent<Transform>();
       trailTransform.localScale = new Vector3(-1f, 1f, 1f);
     }
@@ -142,10 +157,11 @@ public class SlimeGrounded : SlimeStates.SlimeState1Param<bool>
 
   private void DoShrink()
   {
-    slime.Shrink(shrinkRate);
+    slime.SpawnBloodDroplet();
   }
 
-  private void SpawnJumpEffect() {
+  private void SpawnJumpEffect()
+  {
     GameObject jumpEffect = GameObject.Instantiate(this.jumpEffect, transform.position, Quaternion.identity);
     Transform jumpEffectTransform = jumpEffect.GetComponent<Transform>();
     jumpEffectTransform.localScale = new Vector3(1f, 1f, 1f) * slime.transform.localScale.y;

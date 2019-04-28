@@ -9,6 +9,7 @@ TagManager:
   - Hitboxes
   - EffectAudioSource
   - GoalpostChecker
+  - SceneTransitioner
   layers:
   - Default
   - TransparentFX

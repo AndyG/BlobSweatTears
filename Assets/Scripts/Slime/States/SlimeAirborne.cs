@@ -146,6 +146,7 @@ public class SlimeAirborne : SlimeStates.SlimeState1Param<bool>
   private void SpawnAirPlatform()
   {
     GameObject.Instantiate(airPlatformPrototype, transform.position, Quaternion.identity);
+    slime.Shrink();
   }
 
   private bool IsCollidingWithWall(float horizInput)

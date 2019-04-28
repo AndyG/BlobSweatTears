@@ -15,9 +15,6 @@ public class Slime : MonoBehaviour, AnimationManager.AnimationProvider
   [SerializeField]
   private int health;
 
-  [SerializeField]
-  private float deathScaleThreshold = 0.2f;
-
   [Header("Input")]
   [SerializeField]
   public PlayerInput playerInput;
@@ -50,6 +47,7 @@ public class Slime : MonoBehaviour, AnimationManager.AnimationProvider
   public SlimeAirborne stateAirborne;
   public SlimeWallCling stateWallCling;
   public SlimeVictory stateVictory;
+  public SlimeDeath stateDeath;
 
   [Header("Blood")]
   public GroundBloodChecker groundBloodChecker;
@@ -59,6 +57,10 @@ public class Slime : MonoBehaviour, AnimationManager.AnimationProvider
   [Header("Goal")]
   [SerializeField]
   private LayerMask goalpostLayerMask;
+
+  [Header("Collectibles")]
+  [SerializeField]
+  private LayerMask collectibleLayerMask;
 
   [Header("WallJump")]
   public float lockAirborneMovementTime;
@@ -70,6 +72,9 @@ public class Slime : MonoBehaviour, AnimationManager.AnimationProvider
   private SpikeChecker spikeChecker;
 
   private bool didWin = false;
+  private bool didDie = false;
+
+  private SceneTransitioner sceneTransitioner;
 
   void Awake()
   {
@@ -82,10 +87,11 @@ public class Slime : MonoBehaviour, AnimationManager.AnimationProvider
     controller = GetComponent<CharacterController2D>();
     animationManager = new AnimationManager(animator, this);
     goalpostChecker = GameObject.FindGameObjectWithTag("GoalpostChecker").GetComponent<BoxCollider2D>();
+    sceneTransitioner = GameObject.FindGameObjectWithTag("SceneTransitioner").GetComponent<SceneTransitioner>();
 
     fsm = new FSM<Slime, SlimeStates.ISlimeState>(this);
 
-    fsm.ChangeState(stateAirborne, stateAirborne, false);
+    fsm.ChangeState(stateGrounded, stateGrounded, false);
   }
 
   // Update is called once per frame
@@ -95,8 +101,10 @@ public class Slime : MonoBehaviour, AnimationManager.AnimationProvider
     playerInput.Update();
     fsm.TickCurrentState();
     animationManager.Update();
+    CheckForCollectibles();
     UpdateScale();
-    if (!didWin) {
+    if (!didWin)
+    {
       CheckForWin();
     }
     CheckForSpikes();
@@ -124,18 +132,31 @@ public class Slime : MonoBehaviour, AnimationManager.AnimationProvider
     return fsm.currentState.GetAnimation();
   }
 
-  public void Shrink(int amount)
+  public void Shrink()
   {
-    SpawnBloodDroplet();
-    this.health -= amount;
-    UpdateScale();
+    this.health--;
+    health = Mathf.Min(health, 7);
+    if (health <= 0)
+    {
+      Die();
+    }
+    else
+    {
+      UpdateScale();
+    }
   }
 
-  public void OnVictoryCompleted() {
-    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+  public void OnVictoryCompleted()
+  {
+    sceneTransitioner.TransitionToScene(SceneManager.GetActiveScene().buildIndex);
   }
 
-  private void SpawnBloodDroplet()
+  public void OnDeath()
+  {
+    sceneTransitioner.TransitionToScene(SceneManager.GetActiveScene().buildIndex);
+  }
+
+  public void SpawnBloodDroplet()
   {
     Vector3 position = transform.position;
     // position = new Vector3(Mathf.Round(position.x), Mathf.Round(position.y), position.z);
@@ -146,13 +167,8 @@ public class Slime : MonoBehaviour, AnimationManager.AnimationProvider
   private void UpdateScale()
   {
     int xSign = IsFacingDefaultDirection() ? 1 : -1;
-    float scale = health / 100f;
 
-    if (scale < deathScaleThreshold)
-    {
-      //todo -- better death
-      SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
+    float scale = GetScale();
 
     this.transform.localScale = new Vector3(
       scale * xSign,
@@ -161,6 +177,16 @@ public class Slime : MonoBehaviour, AnimationManager.AnimationProvider
     );
 
     controller.recalculateDistanceBetweenRays();
+  }
+
+  private void CheckForCollectibles()
+  {
+    Collider2D collectible = Physics2D.OverlapBox(goalpostChecker.bounds.center, goalpostChecker.bounds.size / 2, 0f, collectibleLayerMask);
+    if (collectible != null)
+    {
+      Absorb(1);
+      GameObject.Destroy(collectible.transform.gameObject);
+    }
   }
 
   private void CheckForWin()
@@ -177,13 +203,61 @@ public class Slime : MonoBehaviour, AnimationManager.AnimationProvider
   {
     if (spikeChecker.IsOnSpikes())
     {
-      SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+      Die();
     }
   }
 
   private void Absorb(int amount)
   {
     this.health += amount;
+    health = Mathf.Min(health, 7);
     UpdateScale();
+  }
+
+  private void Die()
+  {
+    if (!didDie)
+    {
+      this.didDie = true;
+      fsm.ChangeState(stateDeath, stateDeath);
+    }
+  }
+
+  private float GetScale()
+  {
+    // hack
+    if (didDie)
+    {
+      return 1.5f;
+    }
+
+    if (health >= 7)
+    {
+      return 3.5f;
+    }
+    if (health == 6)
+    {
+      return 3f;
+    }
+    if (health == 5)
+    {
+      return 2.5f;
+    }
+    if (health == 4)
+    {
+      return 2f;
+    }
+    else if (health == 3)
+    {
+      return 1.5f;
+    }
+    else if (health == 2)
+    {
+      return 1f;
+    }
+    else
+    {
+      return 0.5f;
+    }
   }
 }
