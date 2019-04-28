@@ -21,6 +21,10 @@ public class SlimeAirborne : SlimeStates.SlimeState1Param<bool>
   [SerializeField]
   private float coyoteTime;
 
+  [Header("AirPlatform")]
+  [SerializeField]
+  private GameObject airPlatformPrototype;
+
   private float currentCoyoteTime;
 
   private float attackCooldown = 0.05f;
@@ -63,7 +67,7 @@ public class SlimeAirborne : SlimeStates.SlimeState1Param<bool>
 
     bool isBoosted = Mathf.Abs(slime.velocity.x) > (slime.horizSpeed + boostedVelocitySlop);
 
-    if (isBoosted && horizInput != 0f && (Mathf.Sign(horizInput) == Mathf.Sign(slime.velocity.x))) {// && Mathf.Abs(targetVelocityX) < Mathf.Abs(slime.velocity.x)) {
+    if (isBoosted && horizInput != 0f && (Mathf.Sign(horizInput) == Mathf.Sign(slime.velocity.x))) {
       // don't need to slow him down!
     } else {
       slime.velocity.x = Mathf.SmoothDamp(
@@ -90,6 +94,10 @@ public class SlimeAirborne : SlimeStates.SlimeState1Param<bool>
       SpawnLandEffect();
       return;
     }
+
+    if (slime.playerInput.GetDidPressAttack()) {
+      SpawnAirPlatform();
+    }
   }
 
   public override string GetAnimation()
@@ -108,5 +116,9 @@ public class SlimeAirborne : SlimeStates.SlimeState1Param<bool>
     GameObject landEffect = GameObject.Instantiate(this.landEffect, transform.position, Quaternion.identity);
     Transform landEffectTransform = landEffect.GetComponent<Transform>();
     landEffectTransform.localScale = new Vector3(1f, 1f, 1f) * slime.transform.localScale.y;
+  }
+
+  private void SpawnAirPlatform() {
+    GameObject.Instantiate(airPlatformPrototype, transform.position, Quaternion.identity);
   }
 }

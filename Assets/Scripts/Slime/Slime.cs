@@ -151,6 +151,13 @@ public class Slime : MonoBehaviour, AnimationManager.AnimationProvider
       Debug.Log("restart");
       //todo -- better win
       SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+      // Destroy(goalpost.gameObject);
+      // Absorb(50);
     }
+  }
+
+  private void Absorb(int amount) {
+    this.health += amount;
+    UpdateScale();
   }
 }

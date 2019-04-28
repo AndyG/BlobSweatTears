@@ -136,7 +136,7 @@ public class SlimeGrounded : SlimeStates.SlimeState1Param<bool>
     GameObject trail = GameObject.Instantiate(bloodTrailPrototype, bloodTrailSource.position, Quaternion.identity);
     if (!facingRight) {
       Transform trailTransform = trail.GetComponent<Transform>();
-      trailTransform.localScale = new Vector3(-1f, 1f, 1f) * slime.transform.localScale.y;
+      trailTransform.localScale = new Vector3(-1f, 1f, 1f);
     }
   }
 
