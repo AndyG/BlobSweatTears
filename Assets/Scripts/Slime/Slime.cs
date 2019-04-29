@@ -11,6 +11,9 @@ public class Slime : MonoBehaviour, AnimationManager.AnimationProvider
   [System.NonSerialized]
   public Animator animator;
 
+  [Header("GroundCheck")]
+  public GroundChecker groundChecker;
+
   [Header("Health")]
   [SerializeField]
   private int health;

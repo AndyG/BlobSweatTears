@@ -57,10 +57,14 @@ public class SlimeGrounded : SlimeStates.SlimeState1Param<bool>
 
   public override void Tick()
   {
-    if (isLanding && !slime.groundBloodChecker.IsGroundBloodActive() && !didShrink)
-    {
-      slime.Shrink();
-      this.didShrink = true;
+    GroundBloodChecker.ActiveBloodInfo activeBloodInfo = slime.groundBloodChecker.IsGroundBloodActive();
+    if (isLanding && !didShrink) {
+      GroundChecker.CollisionInfo solidGroundCollisionInfo = slime.groundChecker.GetCollisionInfo();
+      bool isOnSolidGround = solidGroundCollisionInfo.left || solidGroundCollisionInfo.right;
+      if (isOnSolidGround && !activeBloodInfo.Either()) {
+        slime.Shrink();
+        this.didShrink = true;
+      }
     }
 
     isLanding = false;
@@ -79,8 +83,7 @@ public class SlimeGrounded : SlimeStates.SlimeState1Param<bool>
 
     float horizInput = slime.playerInput.GetHorizInput();
 
-    bool isOnBlood = slime.groundBloodChecker.IsGroundBloodActive();
-    float speed = isOnBlood ? horizSpeedOnBlood : slime.horizSpeed;
+    float speed = activeBloodInfo.Both() ? horizSpeedOnBlood : slime.horizSpeed;
 
     float targetVelocityX = horizInput * speed;
     slime.velocity.x = Mathf.SmoothDamp(
@@ -99,7 +102,7 @@ public class SlimeGrounded : SlimeStates.SlimeState1Param<bool>
     if (horizInput != 0f)
     {
       slime.FaceMovementDirection();
-      if (isOnBlood)
+      if (activeBloodInfo.Both())
       {
         SpawnTrail(horizInput > 0);
       }

@@ -45,7 +45,7 @@ public class GroundBloodChecker : MonoBehaviour
         return groundLeft && groundRight;
     }
 
-    public bool IsGroundBloodActive() {
+    public ActiveBloodInfo IsGroundBloodActive() {
         Vector2 position = transform.position;
         Vector2 bottomLeftOrigin = new Vector2(position.x - bloodCheckRadius, position.y + skinWidth);
         Vector2 bottomRightOrigin = new Vector2(position.x + bloodCheckRadius, position.y + skinWidth);
@@ -53,15 +53,35 @@ public class GroundBloodChecker : MonoBehaviour
         // cast downward and see if there is no blood beneath us.
         RaycastHit2D bloodLeft = Physics2D.Raycast(bottomLeftOrigin, Vector2.down, rayDepth, groundBloodLayerMask);
         RaycastHit2D bloodRight = Physics2D.Raycast(bottomRightOrigin, Vector2.down, rayDepth, groundBloodLayerMask);
-        
-        // need both sides.
-        if (!bloodLeft || !bloodRight) {
-            return false;
+
+        Debug.DrawRay(bottomLeftOrigin, Vector2.down * rayDepth, Color.blue, 1f);
+        Debug.DrawRay(bottomRightOrigin, Vector2.down * rayDepth, Color.blue, 1f);
+
+        ActiveBloodInfo info = new ActiveBloodInfo();
+
+        if (bloodLeft) {
+            GroundBlood groundBloodLeft = bloodLeft.transform.GetComponent<GroundBlood>();
+            info.left = groundBloodLeft.isFinishedSpawning;
         }
 
-        GroundBlood groundBloodLeft = bloodLeft.transform.GetComponent<GroundBlood>();
-        GroundBlood groundBloodRight = bloodRight.transform.GetComponent<GroundBlood>();
+        if (bloodRight) {
+            GroundBlood groundBloodRight = bloodRight.transform.GetComponent<GroundBlood>();
+            info.right = groundBloodRight.isFinishedSpawning;
+        }
 
-        return groundBloodLeft.isFinishedSpawning && groundBloodRight.isFinishedSpawning;
+        return info;
+    }
+
+    public struct ActiveBloodInfo {
+        public bool left;
+        public bool right;
+
+        public bool Either() {
+            return left || right;
+        }
+
+        public bool Both() {
+            return left && right;
+        }
     }
 }

@@ -164,7 +164,6 @@ public class SlimeAirborne : SlimeStates.SlimeState1Param<bool>
     Vector2 rayDirection = (horizInput > 0) ? Vector2.right : Vector2.left;
 
     RaycastHit2D topHit = Physics2D.Raycast(topOrigin, rayDirection, wallCheckDistance, wallLayerMask);
-    Debug.Log("top origin: " + topOrigin + " -- direction: " + rayDirection * wallCheckDistance);
     Debug.DrawRay(topOrigin, rayDirection * wallCheckDistance, Color.blue);
     if (!topHit)
     {
@@ -175,7 +174,6 @@ public class SlimeAirborne : SlimeStates.SlimeState1Param<bool>
     Vector2 bottomOrigin = new Vector2(side, bottom);
     RaycastHit2D bottomHit = Physics2D.Raycast(bottomOrigin, rayDirection, wallCheckDistance, wallLayerMask);
     Debug.DrawRay(bottomOrigin, rayDirection * wallCheckDistance, Color.blue);
-    Debug.Log("is clinging: " + (bool)bottomHit);
     return bottomHit;
   }
 }

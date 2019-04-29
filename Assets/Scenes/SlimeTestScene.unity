@@ -1026,7 +1026,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.5, y: 11, z: -10}
+  m_LocalPosition: {x: -5.5888925, y: 12, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -21505,6 +21505,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84bf7d80bc2c847a98b2d614123cf8c9, type: 3}
+--- !u!114 &891551915 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2926711978938182027, guid: fd1a6ee25761c4217954310924d3a1a4,
+    type: 3}
+  m_PrefabInstance: {fileID: 3860230602920699336}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf3dba4bb967b4a1f8c52df176686407, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &896962004 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1674905502144575220, guid: 84bf7d80bc2c847a98b2d614123cf8c9,
@@ -21643,7 +21655,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 914289396}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.5, y: 11, z: -10}
+  m_LocalPosition: {x: -5.5888925, y: 12, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 738239852}
@@ -23072,12 +23084,12 @@ PrefabInstance:
     - target: {fileID: 3860230602957128377, guid: fd1a6ee25761c4217954310924d3a1a4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.5
+      value: -5.5888925
       objectReference: {fileID: 0}
     - target: {fileID: 3860230602957128377, guid: fd1a6ee25761c4217954310924d3a1a4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3860230602957128377, guid: fd1a6ee25761c4217954310924d3a1a4,
         type: 3}
@@ -23123,6 +23135,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3860230602957128377, guid: fd1a6ee25761c4217954310924d3a1a4,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3860230602957128377, guid: fd1a6ee25761c4217954310924d3a1a4,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3860230602957128379, guid: fd1a6ee25761c4217954310924d3a1a4,
+        type: 3}
+      propertyPath: groundChecker
+      value: 
+      objectReference: {fileID: 891551915}
+    - target: {fileID: 3860230602713510728, guid: fd1a6ee25761c4217954310924d3a1a4,
+        type: 3}
+      propertyPath: bloodCheckRadius
+      value: 0.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 3860230602713510728, guid: fd1a6ee25761c4217954310924d3a1a4,
+        type: 3}
+      propertyPath: rayDepth
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7008197374118401245, guid: fd1a6ee25761c4217954310924d3a1a4, type: 3}

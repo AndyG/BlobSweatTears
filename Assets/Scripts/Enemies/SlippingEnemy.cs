@@ -75,7 +75,7 @@ public class SlippingEnemy : MonoBehaviour, AnimationManager.AnimationProvider
   private void DoPatrol()
   {
     characterController.Move(new Vector3(groundSpeed, 0f, 0f));
-    if (groundBloodChecker.IsGroundBloodActive())
+    if (groundBloodChecker.IsGroundBloodActive().Both())
     {
       this.state = State.SLIPPING;
       return;
