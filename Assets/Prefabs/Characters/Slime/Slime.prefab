@@ -351,9 +351,9 @@ MonoBehaviour:
   gravity: -60
   horizSpeed: 20
   minJumpVelocity: 5
-  velocityXSmoothFactorGrounded: 0.075
+  velocityXSmoothFactorGrounded: 0.1
   velocityXSmoothFactorAirborne: 0.1
-  velocity: {x: 0, y: -1.016978}
+  velocity: {x: 0, y: 0}
   stateGrounded: {fileID: 289904336712243020}
   stateAirborne: {fileID: 5735406285208721559}
   stateWallCling: {fileID: 8827468825382637951}
@@ -368,7 +368,7 @@ MonoBehaviour:
   collectibleLayerMask:
     serializedVersion: 2
     m_Bits: 16384
-  lockAirborneMovementTime: -0.377862
+  lockAirborneMovementTime: -23.60921
   spikeChecker: {fileID: 3860230602453403299}
 --- !u!212 &3860230602957128376
 SpriteRenderer:
@@ -573,6 +573,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3860230601596454590}
     m_Modifications:
+    - target: {fileID: 4006620845159066332, guid: 583065501450e5f4e8ecf3e04d7cf9c2,
+        type: 3}
+      propertyPath: m_Name
+      value: StateVictory
+      objectReference: {fileID: 0}
     - target: {fileID: 817540068546937027, guid: 583065501450e5f4e8ecf3e04d7cf9c2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -627,11 +632,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4006620845159066332, guid: 583065501450e5f4e8ecf3e04d7cf9c2,
-        type: 3}
-      propertyPath: m_Name
-      value: StateVictory
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 583065501450e5f4e8ecf3e04d7cf9c2, type: 3}
@@ -839,10 +839,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3860230601596454590}
     m_Modifications:
-    - target: {fileID: 8233354168712093363, guid: 363f52a97bb4e434e8e6770b27ca48ed,
+    - target: {fileID: 5795251069907109963, guid: 363f52a97bb4e434e8e6770b27ca48ed,
         type: 3}
-      propertyPath: timeToSpendDying
-      value: 1
+      propertyPath: m_Name
+      value: StateDeath
       objectReference: {fileID: 0}
     - target: {fileID: 5247230226087535115, guid: 363f52a97bb4e434e8e6770b27ca48ed,
         type: 3}
@@ -899,10 +899,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5795251069907109963, guid: 363f52a97bb4e434e8e6770b27ca48ed,
+    - target: {fileID: 8233354168712093363, guid: 363f52a97bb4e434e8e6770b27ca48ed,
         type: 3}
-      propertyPath: m_Name
-      value: StateDeath
+      propertyPath: timeToSpendDying
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 363f52a97bb4e434e8e6770b27ca48ed, type: 3}
@@ -931,6 +931,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3860230601596454590}
     m_Modifications:
+    - target: {fileID: 999823338125349909, guid: f65cae933a59943c783977293aa4e25c,
+        type: 3}
+      propertyPath: m_Name
+      value: StateWallCling
+      objectReference: {fileID: 0}
     - target: {fileID: 5445721901605515540, guid: f65cae933a59943c783977293aa4e25c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -985,11 +990,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 999823338125349909, guid: f65cae933a59943c783977293aa4e25c,
-        type: 3}
-      propertyPath: m_Name
-      value: StateWallCling
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f65cae933a59943c783977293aa4e25c, type: 3}

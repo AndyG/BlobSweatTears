@@ -67,8 +67,6 @@ public class SlimeGrounded : SlimeStates.SlimeState1Param<bool>
       }
     }
 
-    isLanding = false;
-
     CheckForGroundBlood();
 
     didRunThisFrame = false;
@@ -83,18 +81,22 @@ public class SlimeGrounded : SlimeStates.SlimeState1Param<bool>
 
     float horizInput = slime.playerInput.GetHorizInput();
 
-    float speed = activeBloodInfo.Both() ? horizSpeedOnBlood : slime.horizSpeed;
+    if (horizInput != 0f) {
+      float speed = activeBloodInfo.Both() ? horizSpeedOnBlood : slime.horizSpeed;
 
-    float targetVelocityX = horizInput * speed;
-    slime.velocity.x = Mathf.SmoothDamp(
-      slime.velocity.x,
-      targetVelocityX,
-      ref slime.velocityXSmoothing,
-      slime.velocityXSmoothFactorGrounded);
+      float targetVelocityX = horizInput * speed;
+      slime.velocity.x = Mathf.SmoothDamp(
+        slime.velocity.x,
+        targetVelocityX,
+        ref slime.velocityXSmoothing,
+        slime.velocityXSmoothFactorGrounded);
 
-    if (targetVelocityX != 0f)
-    {
-      didRunThisFrame = true;
+      if (targetVelocityX != 0f)
+      {
+        didRunThisFrame = true;
+      }
+    } else {
+      slime.velocity.x = 0f;
     }
 
     slime.velocity.y = slime.gravity * Time.deltaTime;
@@ -113,6 +115,8 @@ public class SlimeGrounded : SlimeStates.SlimeState1Param<bool>
     {
       slime.fsm.ChangeState(slime.stateAirborne, slime.stateAirborne, true);
     }
+
+    isLanding = false;
   }
 
   public override string GetAnimation()
