@@ -436,7 +436,7 @@ PrefabInstance:
     - target: {fileID: 8062412693786906068, guid: 412cc1ca353244214abbfb4f2dc3fcc4,
         type: 3}
       propertyPath: m_margin.y
-      value: 74.62462
+      value: 24.273344
       objectReference: {fileID: 0}
     - target: {fileID: 8062412693786906068, guid: 412cc1ca353244214abbfb4f2dc3fcc4,
         type: 3}
@@ -486,12 +486,12 @@ PrefabInstance:
     - target: {fileID: 8062412693786906069, guid: 412cc1ca353244214abbfb4f2dc3fcc4,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 25
+      value: 23.5
       objectReference: {fileID: 0}
     - target: {fileID: 8062412693786906069, guid: 412cc1ca353244214abbfb4f2dc3fcc4,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 25
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8062412692769171742, guid: 412cc1ca353244214abbfb4f2dc3fcc4,
         type: 3}
