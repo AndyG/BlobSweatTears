@@ -282,7 +282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b05c682179235244d8e8b735ddf6fbaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rayDepth: 0.5
+  rayDepth: 0.2
   skinWidth: 0.02
   groundBloodLayerMask:
     serializedVersion: 2
@@ -290,8 +290,8 @@ MonoBehaviour:
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 2048
-  groundCheckRadius: 0.5
-  bloodCheckRadius: 0.35
+  groundCheckRadius: 0.35
+  bloodCheckRadius: 0.4
 --- !u!1 &3860230602957128358
 GameObject:
   m_ObjectHideFlags: 0
@@ -345,7 +345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02f2c46a6efdf46a69c12f7cdea3fd98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundChecker: {fileID: 0}
+  groundChecker: {fileID: 2926711978938182027}
   health: 4
   playerInput: {fileID: 11400000, guid: 8c5a438a6a6204d558dd442e34dea6e8, type: 2}
   gravity: -60
