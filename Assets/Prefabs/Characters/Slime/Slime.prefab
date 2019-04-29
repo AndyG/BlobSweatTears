@@ -174,7 +174,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3860230602713510838}
-  - component: {fileID: 3860230602713510839}
   - component: {fileID: 3860230602713510728}
   m_Layer: 8
   m_Name: GroundBloodChecker
@@ -197,32 +196,6 @@ Transform:
   m_Father: {fileID: 3860230602957128377}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &3860230602713510839
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3860230602713510837}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.008764744, y: 0.00000023841858}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 0.21116686}
-  m_EdgeRadius: 0
 --- !u!114 &3860230602713510728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -628,11 +601,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -429518828339011792, guid: ce7a5479e1f114177a6e3cbd57450d77,
-        type: 3}
-      propertyPath: wallCheckDistance
-      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 2598306572102128216, guid: ce7a5479e1f114177a6e3cbd57450d77,
         type: 3}
