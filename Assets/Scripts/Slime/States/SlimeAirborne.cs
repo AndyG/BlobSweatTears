@@ -116,7 +116,7 @@ public class SlimeAirborne : SlimeStates.SlimeState1Param<bool>
       return;
     }
 
-    if (slime.playerInput.GetDidPressJump())
+    if (slime.playerInput.GetDidPressAttack())
     {
       SpawnAirPlatform();
     }
