@@ -12,9 +12,30 @@ EditorBuildSettings:
     path: Assets/Scenes/Main Menu.unity
     guid: b34978e574b88ec4c91175cb30be614f
   - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 6c4eec7796acc4fd39bb619664456c3e
-  - enabled: 1
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
     path: Assets/Scenes/Level2.unity
     guid: 877e61bcc3dc64ea6960e748046f338b
+  - enabled: 1
+    path: Assets/Scenes/Levels/SlimeTemplateScene.unity
+    guid: 6404361242099c640bd86898abbd5599
+  - enabled: 1
+    path: Assets/Scenes/Levels/BloodBoosting1.unity
+    guid: 7b3071a154de32c45b96fb77bfad1c02
+  - enabled: 1
+    path: Assets/Scenes/Levels/BloodGood.unity
+    guid: 5a8940ca5a8d39745a4d88a1b87de7a5
+  - enabled: 1
+    path: Assets/Scenes/Levels/PlatformTutorial.unity
+    guid: f6942b9dff30e874380fd4f27be1b7ca
+  - enabled: 1
+    path: Assets/Scenes/Levels/SizeMatters.unity
+    guid: 167f65ac46557d241913d17e2c4ba0bd
+  - enabled: 1
+    path: Assets/Scenes/Levels/SlimeGoatTunnelLevel.unity
+    guid: 07fc5a84f4042f940b239741af506ff5
+  - enabled: 1
+    path: Assets/Scenes/Levels/WallJumpsWillWork.unity
+    guid: 0bb10d76944e50e408d179548387a877
   m_configObjects: {}
