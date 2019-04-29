@@ -65,3 +65,6 @@ TagManager:
   - name: Trails
     uniqueID: 2690548225
     locked: 0
+  - name: Hazards
+    uniqueID: 3977184565
+    locked: 0

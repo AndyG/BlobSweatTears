@@ -106,11 +106,14 @@ public class Slime : MonoBehaviour, AnimationManager.AnimationProvider
     animationManager.Update();
     CheckForCollectibles();
     UpdateScale();
-    if (!didWin)
+    if (!didWin && !didDie)
     {
       CheckForWin();
     }
-    CheckForSpikes();
+
+    if (!didWin && !didDie) {
+      CheckForSpikes();
+    }
   }
 
   public bool IsFacingDefaultDirection()
@@ -137,6 +140,10 @@ public class Slime : MonoBehaviour, AnimationManager.AnimationProvider
 
   public void Shrink()
   {
+    if (didWin || didDie) {
+      return;
+    }
+
     this.health--;
     health = Mathf.Min(health, 7);
     if (health <= 0)
