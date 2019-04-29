@@ -17,7 +17,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Level2.unity
     guid: 877e61bcc3dc64ea6960e748046f338b
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Levels/SlimeTemplateScene.unity
     guid: 6404361242099c640bd86898abbd5599
   - enabled: 1

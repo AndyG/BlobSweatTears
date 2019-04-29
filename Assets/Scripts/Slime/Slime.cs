@@ -161,7 +161,7 @@ public class Slime : MonoBehaviour, AnimationManager.AnimationProvider
 
   public void OnVictoryCompleted()
   {
-    sceneTransitioner.TransitionToScene(SceneManager.GetActiveScene().buildIndex);
+    sceneTransitioner.TransitionToScene(SceneManager.GetActiveScene().buildIndex + 1);
   }
 
   public void OnDeath()

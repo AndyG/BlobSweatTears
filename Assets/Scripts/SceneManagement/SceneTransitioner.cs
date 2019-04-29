@@ -24,6 +24,6 @@ public class SceneTransitioner : MonoBehaviour
     }
 
     public void OnTransitionComplete() {
-        SceneManager.LoadScene(this.targetSceneIndex);
+        SceneManager.LoadScene(targetSceneIndex);
     }
 }

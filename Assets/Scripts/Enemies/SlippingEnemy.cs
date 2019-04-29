@@ -74,6 +74,7 @@ public class SlippingEnemy : MonoBehaviour, AnimationManager.AnimationProvider
 
   private void DoPatrol()
   {
+    Vector3 velocity = new Vector3(groundSpeed, 0f, 0f) * Time.deltaTime;
     characterController.Move(new Vector3(groundSpeed, 0f, 0f));
     if (groundBloodChecker.IsGroundBloodActive().Both())
     {
