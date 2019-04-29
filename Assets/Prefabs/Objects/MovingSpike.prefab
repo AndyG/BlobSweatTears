@@ -359,7 +359,7 @@ MonoBehaviour:
   speed: 16
   threshold: 0.01
   pauseTime: 1
-  shakeDistanceThreshold: 30
+  shakeDistanceThreshold: 15
 --- !u!95 &986340941
 Animator:
   serializedVersion: 3
