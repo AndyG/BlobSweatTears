@@ -24,6 +24,7 @@ public class SlimeDeath : SlimeStates.SlimeState0Param
   {
     this.timeInState = 0f;
     this.hasReportedDeath = false;
+    impulseSource.GenerateImpulse();
   }
 
   public override void Tick()
@@ -33,7 +34,6 @@ public class SlimeDeath : SlimeStates.SlimeState0Param
     {
       slime.OnDeath();
       this.hasReportedDeath = true;
-      impulseSource.GenerateImpulse();
     }
   }
 

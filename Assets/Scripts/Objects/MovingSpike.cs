@@ -14,6 +14,8 @@ public class MovingSpike : MonoBehaviour
 
   [Header("Movement")]
   [SerializeField]
+  private bool isMoving;
+  [SerializeField]
   private float speed;
   [SerializeField]
   private float threshold = 0.01f;
@@ -43,6 +45,10 @@ public class MovingSpike : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
+    if (!isMoving) {
+      return;
+    }
+
     if (curPauseTime < pauseTime)
     {
       curPauseTime += Time.deltaTime;

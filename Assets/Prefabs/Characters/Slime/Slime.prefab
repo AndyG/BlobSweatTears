@@ -353,7 +353,7 @@ MonoBehaviour:
   minJumpVelocity: 5
   velocityXSmoothFactorGrounded: 0.075
   velocityXSmoothFactorAirborne: 0.1
-  velocity: {x: 0, y: 0}
+  velocity: {x: 0, y: -1.016978}
   stateGrounded: {fileID: 289904336712243020}
   stateAirborne: {fileID: 5735406285208721559}
   stateWallCling: {fileID: 8827468825382637951}
@@ -368,7 +368,7 @@ MonoBehaviour:
   collectibleLayerMask:
     serializedVersion: 2
     m_Bits: 16384
-  lockAirborneMovementTime: 0
+  lockAirborneMovementTime: -0.377862
   spikeChecker: {fileID: 3860230602453403299}
 --- !u!212 &3860230602957128376
 SpriteRenderer:
