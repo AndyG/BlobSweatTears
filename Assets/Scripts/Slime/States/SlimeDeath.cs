@@ -10,6 +10,10 @@ public class SlimeDeath : SlimeStates.SlimeState0Param
   [SerializeField]
   private float timeToSpendDying = 3f;
 
+  [Header("Sound Effects")]
+  [SerializeField]
+  private AudioClip deathSound;
+
   private Cinemachine.CinemachineImpulseSource impulseSource;
 
   private float timeInState = 0f;
@@ -25,6 +29,7 @@ public class SlimeDeath : SlimeStates.SlimeState0Param
     this.timeInState = 0f;
     this.hasReportedDeath = false;
     impulseSource.GenerateImpulse();
+    slime.effectsAudioSource.PlayOneShot(deathSound);
   }
 
   public override void Tick()

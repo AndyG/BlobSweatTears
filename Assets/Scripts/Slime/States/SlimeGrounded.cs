@@ -4,6 +4,7 @@ using UnityEngine;
 
 using Prime31;
 
+[RequireComponent(typeof(AudioSource))]
 public class SlimeGrounded : SlimeStates.SlimeState1Param<bool>
 {
 
@@ -30,6 +31,8 @@ public class SlimeGrounded : SlimeStates.SlimeState1Param<bool>
   private bool didSpawnLandingDroplets;
   private bool didShrink = false;
 
+  private AudioSource audioSource;
+
   [Header("Landing")]
   [SerializeField]
   private GameObject landingDropletPrototype;
@@ -42,25 +45,48 @@ public class SlimeGrounded : SlimeStates.SlimeState1Param<bool>
 
   [Header("Blood Running")]
   [SerializeField]
-  private float horizSpeedOnBlood = 40f;
-  [SerializeField]
   private Transform bloodTrailSource;
   [SerializeField]
   private GameObject bloodTrailPrototype;
+
+  [Header("Movement Sound Effects")]
+  [SerializeField]
+  private AudioSource movementSoundsAudioSource;
+  [SerializeField]
+  private AudioClip solidGroundMovementAudioClip;
+  [SerializeField]
+  private AudioClip wetGroundMovementAudioClip;
+  [SerializeField]
+  private float solidMovementSoundEffectCooldown;
+  [SerializeField]
+  private float wetMovementSoundEffectCooldown;
+
+  [Header("Other Sound Effects")]
+  [SerializeField]
+  private AudioClip landAudioClip;
+
+  private float curMovementSoundEffectCooldown;
+  private float bloodSpeedMultiplier = 2f;
+
+  void Start() {
+    this.audioSource = GetComponent<AudioSource>();
+  }
 
   public override void Enter(bool isLanding)
   {
     this.isLanding = isLanding;
     this.didSpawnLandingDroplets = false;
     this.didShrink = false;
+    this.curMovementSoundEffectCooldown = 0f;
   }
 
   public override void Tick()
   {
     GroundBloodChecker.ActiveBloodInfo activeBloodInfo = slime.groundBloodChecker.IsGroundBloodActive();
+    GroundChecker.CollisionInfo solidGroundCollisionInfo = slime.groundChecker.GetCollisionInfo();
+    bool isOnSolidGround = solidGroundCollisionInfo.left || solidGroundCollisionInfo.right;
+
     if (isLanding && !didShrink) {
-      GroundChecker.CollisionInfo solidGroundCollisionInfo = slime.groundChecker.GetCollisionInfo();
-      bool isOnSolidGround = solidGroundCollisionInfo.left || solidGroundCollisionInfo.right;
       if (isOnSolidGround && !activeBloodInfo.Either()) {
         slime.Shrink();
         this.didShrink = true;
@@ -82,7 +108,7 @@ public class SlimeGrounded : SlimeStates.SlimeState1Param<bool>
     float horizInput = slime.playerInput.GetHorizInput();
 
     if (horizInput != 0f) {
-      float speed = activeBloodInfo.Both() ? horizSpeedOnBlood : slime.horizSpeed;
+      float speed = activeBloodInfo.Both() ? slime.horizSpeed * bloodSpeedMultiplier : slime.horizSpeed;
 
       float targetVelocityX = horizInput * speed;
       slime.velocity.x = Mathf.SmoothDamp(
@@ -104,9 +130,22 @@ public class SlimeGrounded : SlimeStates.SlimeState1Param<bool>
     if (horizInput != 0f)
     {
       slime.FaceMovementDirection();
+      AudioClip movementSoundEffect = null;
       if (activeBloodInfo.Both())
       {
         SpawnTrail(horizInput > 0);
+        if (curMovementSoundEffectCooldown >= wetMovementSoundEffectCooldown) {
+          movementSoundEffect = wetGroundMovementAudioClip;
+        }
+      } else if (isOnSolidGround) {
+        if (curMovementSoundEffectCooldown >= solidMovementSoundEffectCooldown) {
+          movementSoundEffect = solidGroundMovementAudioClip;
+        }
+      }
+
+      if (movementSoundEffect != null) {
+        movementSoundsAudioSource.PlayOneShot(movementSoundEffect);
+        curMovementSoundEffectCooldown = 0f;
       }
     }
 
@@ -116,7 +155,12 @@ public class SlimeGrounded : SlimeStates.SlimeState1Param<bool>
       slime.fsm.ChangeState(slime.stateAirborne, slime.stateAirborne, true);
     }
 
+    if (isLanding) {
+      audioSource.PlayOneShot(landAudioClip);
+    }
+
     isLanding = false;
+    curMovementSoundEffectCooldown += Time.deltaTime;
   }
 
   public override string GetAnimation()

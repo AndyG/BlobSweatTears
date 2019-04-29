@@ -33,12 +33,17 @@ public class SlimeAirborne : SlimeStates.SlimeState1Param<bool>
   [SerializeField]
   private float wallCheckDistance;
 
+  [SerializeField]
+  private float maxFallTime = 4f;
+
   private float currentCoyoteTime;
 
   private float attackCooldown = 0.05f;
   private float timeInState = 0.25f;
 
   private bool didRunThisFrame = false;
+
+  private float curFallTime;
 
   // Add a little slop value to help with checks to see if we're boosted.
   private float boostedVelocitySlop = 0.05f;
@@ -53,6 +58,8 @@ public class SlimeAirborne : SlimeStates.SlimeState1Param<bool>
     {
       currentCoyoteTime = coyoteTime + 1;
     }
+
+    this.curFallTime = 0f;
   }
 
   public override void Tick()
@@ -121,6 +128,11 @@ public class SlimeAirborne : SlimeStates.SlimeState1Param<bool>
       bool isWallOnLeft = horizInput < 0;
       slime.fsm.ChangeState(slime.stateWallCling, slime.stateWallCling, isWallOnLeft);
       return;
+    }
+
+    curFallTime += Time.deltaTime;
+    if (curFallTime > maxFallTime) {
+      slime.Die();
     }
   }
 

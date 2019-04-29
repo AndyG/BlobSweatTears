@@ -44,3 +44,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeToSpendCelebrating: 2
+  victoryAudioClip: {fileID: 8300000, guid: 3d4318ddfec4fcb4f82e0e20a00e3407, type: 3}

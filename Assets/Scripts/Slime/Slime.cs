@@ -5,11 +5,14 @@ using UnityEngine.SceneManagement;
 using Prime31;
 
 
+[RequireComponent(typeof(AudioSource))]
 public class Slime : MonoBehaviour, AnimationManager.AnimationProvider
 {
 
   [System.NonSerialized]
   public Animator animator;
+
+  public AudioSource effectsAudioSource;
 
   [Header("GroundCheck")]
   public GroundChecker groundChecker;
@@ -224,7 +227,7 @@ public class Slime : MonoBehaviour, AnimationManager.AnimationProvider
     UpdateScale();
   }
 
-  private void Die()
+  public void Die()
   {
     if (!didDie)
     {

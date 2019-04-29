@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(AudioSource))]
 public class BloodPlatform : MonoBehaviour
 {
 
@@ -21,17 +22,24 @@ public class BloodPlatform : MonoBehaviour
     [Header("State")]
     private State state;
 
+    [Header("Sound Effects")]
+    [SerializeField]
+    private AudioClip spawnAudioClip;
+
     private Animator _animator;
     private BoxCollider2D _collider;
     private Rigidbody2D _rb2d;
+    private AudioSource _audioSource;
 
     void Start() {
         this.state = State.COMPACT;
         this._animator = GetComponent<Animator>();
         this._collider = GetComponent<BoxCollider2D>();
         this._rb2d = GetComponent<Rigidbody2D>();
-
         this._collider.enabled = false;
+
+        this._audioSource = GetComponent<AudioSource>();
+        _audioSource.PlayOneShot(spawnAudioClip);
     }
 
     // Update is called once per frame

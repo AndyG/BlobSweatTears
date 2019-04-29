@@ -114,3 +114,4 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2048
   wallCheckDistance: 0.05
+  maxFallTime: 4

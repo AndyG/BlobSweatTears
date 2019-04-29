@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeToSpendDying: 3
+  deathSound: {fileID: 8300000, guid: b1cbe5dec0674ea478606d7fa4993f70, type: 3}
 --- !u!114 &7739473971921760032
 MonoBehaviour:
   m_ObjectHideFlags: 0
