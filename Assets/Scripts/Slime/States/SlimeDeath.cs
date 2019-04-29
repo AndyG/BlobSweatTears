@@ -10,8 +10,15 @@ public class SlimeDeath : SlimeStates.SlimeState0Param
   [SerializeField]
   private float timeToSpendDying = 3f;
 
+  private Cinemachine.CinemachineImpulseSource impulseSource;
+
   private float timeInState = 0f;
   private bool hasReportedDeath;
+
+  void Start()
+  {
+    this.impulseSource = GetComponent<Cinemachine.CinemachineImpulseSource>();
+  }
 
   public override void Enter()
   {
@@ -26,6 +33,7 @@ public class SlimeDeath : SlimeStates.SlimeState0Param
     {
       slime.OnDeath();
       this.hasReportedDeath = true;
+      impulseSource.GenerateImpulse();
     }
   }
 

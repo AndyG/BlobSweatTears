@@ -57,7 +57,7 @@ public class SlimeGrounded : SlimeStates.SlimeState1Param<bool>
 
   public override void Tick()
   {
-    if (isLanding && slime.groundBloodChecker.IsOnBloodlessGround() && !didShrink)
+    if (isLanding && !slime.groundBloodChecker.IsGroundBloodActive() && !didShrink)
     {
       slime.Shrink();
       this.didShrink = true;

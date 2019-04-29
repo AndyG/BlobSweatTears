@@ -15,6 +15,12 @@ public class SlippingEnemy : MonoBehaviour, AnimationManager.AnimationProvider
   private GroundBloodChecker groundBloodChecker;
   private GroundChecker groundChecker;
 
+  [Header("Death")]
+  [SerializeField]
+  private Transform deathPickupSpawnPoint;
+  [SerializeField]
+  private GameObject deathPickupPrototype;
+
   [SerializeField]
   private float groundSpeed;
 
@@ -47,21 +53,22 @@ public class SlippingEnemy : MonoBehaviour, AnimationManager.AnimationProvider
   public void OnSlipFinished()
   {
     this.state = State.SLIPPED;
+    GameObject.Instantiate(deathPickupPrototype, this.deathPickupSpawnPoint.position, Quaternion.identity);
   }
 
   public string GetAnimation()
   {
     if (state == State.PATROLLING)
     {
-      return "SlippingEnemyGrounded";
+      return "walk";
     }
     else if (state == State.SLIPPING)
     {
-      return "SlippingEnemySlipping";
+      return "slip";
     }
     else
     {
-      return "SlippingEnemySlipped";
+      return "EyeballEnemy_dead";
     }
   }
 

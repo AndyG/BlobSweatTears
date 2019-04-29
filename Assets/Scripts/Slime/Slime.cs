@@ -231,6 +231,12 @@ public class Slime : MonoBehaviour, AnimationManager.AnimationProvider
       return 1.5f;
     }
 
+    // hack 2
+    if (didWin && health <= 1)
+    {
+      return 1f;
+    }
+
     if (health >= 7)
     {
       return 3.5f;
