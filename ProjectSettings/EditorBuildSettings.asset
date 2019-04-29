@@ -26,7 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/BloodGood.unity
     guid: 5a8940ca5a8d39745a4d88a1b87de7a5
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Levels/PlatformTutorial.unity
     guid: f6942b9dff30e874380fd4f27be1b7ca
   - enabled: 1

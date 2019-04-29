@@ -17162,7 +17162,7 @@ PrefabInstance:
     - target: {fileID: 1545445812306969435, guid: 60e1ae84279a941b58869c121ed9fc88,
         type: 3}
       propertyPath: m_text
-      value: '1-3: Size Matters'
+      value: '1-4: Size Matters'
       objectReference: {fileID: 0}
     - target: {fileID: 1545445812306969435, guid: 60e1ae84279a941b58869c121ed9fc88,
         type: 3}

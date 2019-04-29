@@ -97,7 +97,7 @@ LightmapSettings:
     m_ShowResolutionOverlay: 1
     m_ExportTrainingData: 0
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -13440,7 +13440,7 @@ PrefabInstance:
     - target: {fileID: 1545445812306969435, guid: 60e1ae84279a941b58869c121ed9fc88,
         type: 3}
       propertyPath: m_text
-      value: '1-2: They Watch'
+      value: '1-5: They Watch'
       objectReference: {fileID: 0}
     - target: {fileID: 1545445812306969435, guid: 60e1ae84279a941b58869c121ed9fc88,
         type: 3}

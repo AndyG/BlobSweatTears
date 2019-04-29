@@ -14,6 +14,7 @@ public class SlippingEnemy : MonoBehaviour, AnimationManager.AnimationProvider
   private Animator animator;
   private GroundBloodChecker groundBloodChecker;
   private GroundChecker groundChecker;
+  private BoxCollider2D _collider;
 
   [Header("Death")]
   [SerializeField]
@@ -36,6 +37,7 @@ public class SlippingEnemy : MonoBehaviour, AnimationManager.AnimationProvider
     this.groundBloodChecker = GetComponentInChildren<GroundBloodChecker>();
     this.groundChecker = GetComponentInChildren<GroundChecker>();
     this.state = State.PATROLLING;
+    this._collider = GetComponent<BoxCollider2D>();
     FaceMovementDirection();
   }
 
@@ -79,6 +81,7 @@ public class SlippingEnemy : MonoBehaviour, AnimationManager.AnimationProvider
     if (groundBloodChecker.IsGroundBloodActive().Both())
     {
       this.state = State.SLIPPING;
+      GameObject.Destroy(this._collider);
       return;
     }
 
