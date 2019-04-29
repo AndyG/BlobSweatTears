@@ -47,6 +47,9 @@ TagManager:
   - name: Background
     uniqueID: 2375064495
     locked: 0
+  - name: AmbienceBackground
+    uniqueID: 4048813507
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
