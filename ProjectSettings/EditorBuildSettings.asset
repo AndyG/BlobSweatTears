@@ -26,9 +26,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/BloodGood.unity
     guid: 5a8940ca5a8d39745a4d88a1b87de7a5
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Levels/PlatformTutorial.unity
-    guid: f6942b9dff30e874380fd4f27be1b7ca
+    guid: aa5f3ec3fa3d30d45ba194947ca0d885
   - enabled: 1
     path: Assets/Scenes/Levels/SizeMatters.unity
     guid: 167f65ac46557d241913d17e2c4ba0bd
@@ -38,4 +38,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/WallJumpsWillWork.unity
     guid: 0bb10d76944e50e408d179548387a877
+  - enabled: 1
+    path: Assets/Scenes/Levels/FinalChallenge.unity
+    guid: dfe1a0397fa8c984482517d13f5711df
+  - enabled: 1
+    path: Assets/Scenes/Levels/EndLevel.unity
+    guid: c332b2d0fc6c85b4a841795e1ef62236
   m_configObjects: {}

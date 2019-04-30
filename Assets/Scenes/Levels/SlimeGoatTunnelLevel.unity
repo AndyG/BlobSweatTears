@@ -97,7 +97,7 @@ LightmapSettings:
     m_ShowResolutionOverlay: 1
     m_ExportTrainingData: 0
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -392,7 +392,6 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
-  - component: {fileID: 519420030}
   - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
@@ -409,18 +408,6 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
---- !u!114 &519420030
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a160d838ff8b4b4693ac20007e008c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -703,6 +690,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1018072988, guid: 3f80c482f4b27ef43820296b1c397361, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 510928753}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f80c482f4b27ef43820296b1c397361, type: 3}
 --- !u!1001 &726686426
@@ -776,6 +767,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: -1
       objectReference: {fileID: 0}
+    - target: {fileID: 1018072988, guid: 3f80c482f4b27ef43820296b1c397361, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 510928753}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f80c482f4b27ef43820296b1c397361, type: 3}
 --- !u!1001 &773510585
@@ -844,6 +839,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1018072988, guid: 3f80c482f4b27ef43820296b1c397361, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 510928753}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f80c482f4b27ef43820296b1c397361, type: 3}
 --- !u!4 &797738238 stripped
@@ -13648,6 +13647,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1018072988, guid: 3f80c482f4b27ef43820296b1c397361, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 510928753}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f80c482f4b27ef43820296b1c397361, type: 3}
 --- !u!4 &1229028845 stripped
@@ -13899,6 +13902,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: -1
       objectReference: {fileID: 0}
+    - target: {fileID: 1018072988, guid: 3f80c482f4b27ef43820296b1c397361, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 510928753}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f80c482f4b27ef43820296b1c397361, type: 3}
 --- !u!1001 &2102882373
