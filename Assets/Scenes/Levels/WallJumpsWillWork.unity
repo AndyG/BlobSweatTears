@@ -97,7 +97,7 @@ LightmapSettings:
     m_ShowResolutionOverlay: 1
     m_ExportTrainingData: 0
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -635,6 +635,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoalpostCamera
       objectReference: {fileID: 0}
+    - target: {fileID: 1784648111845154793, guid: 135a3e579a955a54eb00075bde1911cb,
+        type: 3}
+      propertyPath: m_Follow
+      value: 
+      objectReference: {fileID: 1970076423}
     - target: {fileID: 1784648111845154798, guid: 135a3e579a955a54eb00075bde1911cb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -690,11 +695,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1784648111845154793, guid: 135a3e579a955a54eb00075bde1911cb,
-        type: 3}
-      propertyPath: m_Follow
-      value: 
-      objectReference: {fileID: 1970076423}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 135a3e579a955a54eb00075bde1911cb, type: 3}
 --- !u!1 &826025480
@@ -4753,6 +4753,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerCamera
       objectReference: {fileID: 0}
+    - target: {fileID: 5251066402611378253, guid: 0655acfd855c76d41bd67ece07d90f97,
+        type: 3}
+      propertyPath: m_Follow
+      value: 
+      objectReference: {fileID: 510928753}
     - target: {fileID: 5251066402611378254, guid: 0655acfd855c76d41bd67ece07d90f97,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4808,11 +4813,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5251066402611378253, guid: 0655acfd855c76d41bd67ece07d90f97,
-        type: 3}
-      propertyPath: m_Follow
-      value: 
-      objectReference: {fileID: 510928753}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0655acfd855c76d41bd67ece07d90f97, type: 3}
 --- !u!1 &866040440
@@ -6827,6 +6827,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3860230602957128379, guid: fd1a6ee25761c4217954310924d3a1a4,
+        type: 3}
+      propertyPath: inputLockTime
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd1a6ee25761c4217954310924d3a1a4, type: 3}

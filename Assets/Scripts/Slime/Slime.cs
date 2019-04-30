@@ -77,6 +77,13 @@ public class Slime : MonoBehaviour, AnimationManager.AnimationProvider
   [SerializeField]
   private SpikeChecker spikeChecker;
 
+  [SerializeField]
+  private float inputLockTime = 4f;
+
+  private float curInputLockTime = 0f;
+
+  public bool inputLocked = true;
+
   private bool didWin = false;
   private bool didDie = false;
 
@@ -103,6 +110,12 @@ public class Slime : MonoBehaviour, AnimationManager.AnimationProvider
   // Update is called once per frame
   void Update()
   {
+    if (inputLocked) {
+      curInputLockTime += Time.deltaTime;
+      if (curInputLockTime >= inputLockTime) {
+        inputLocked = false;
+      }
+    }
     lockAirborneMovementTime -= Time.deltaTime;
     playerInput.Update();
     fsm.TickCurrentState();

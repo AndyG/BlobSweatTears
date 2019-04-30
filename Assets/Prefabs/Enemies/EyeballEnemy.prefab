@@ -83,7 +83,7 @@ MonoBehaviour:
   deathPickupSpawnPoint: {fileID: 3292073393767678417}
   deathPickupPrototype: {fileID: 7950011339514655956, guid: de229114b8f61445fa9193791bf04cdc,
     type: 3}
-  groundSpeed: -0.125
+  groundSpeed: -5
   state: 0
 --- !u!95 &2240885589883084390
 Animator:

@@ -82,6 +82,10 @@ public class SlimeGrounded : SlimeStates.SlimeState1Param<bool>
 
   public override void Tick()
   {
+    if (slime.inputLocked) {
+      return;
+    }
+
     GroundBloodChecker.ActiveBloodInfo activeBloodInfo = slime.groundBloodChecker.IsGroundBloodActive();
     GroundChecker.CollisionInfo solidGroundCollisionInfo = slime.groundChecker.GetCollisionInfo();
     bool isOnSolidGround = solidGroundCollisionInfo.left || solidGroundCollisionInfo.right;
